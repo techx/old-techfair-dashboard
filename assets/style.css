@@ -1,0 +1,50 @@
+html {
+	height:100%;
+}
+
+body {
+	height:105%;
+}
+
+b {
+	font-weight:500;
+}
+
+h1 {
+	margin:20px;
+	margin-bottom:0px;
+	font-family: 'Open Sans', sans serif;
+	font-weight:300;
+}
+
+.box {
+	box-sizing: border-box;	
+	min-width:45%;
+	min-height:100%;
+	margin:15px;
+	float:left;
+	border-style:solid;
+	border-color:rgb(228, 225, 225);
+	border-width:1px;
+	border-radius:10px;
+	padding:3px;
+	}
+
+#reg-stats, #ticket-stats {
+	padding:10px;
+}
+
+table {
+	font-family: 'Open Sans', sans serif;
+	font-weight:300;
+	min-width:100%;
+}
+
+table b {
+	font-size:30px;
+}
+
+th, td {
+	min-width:32%;
+	text-align:center;
+}

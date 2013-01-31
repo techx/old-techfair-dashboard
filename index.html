@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="assets/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,500' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+<h1>
+<div style="height:50px">
+  <div style="float:left; margin-right: 15px"><b>tech</b>fair</div>
+  <div style="float:left; margin-right: 15px">|</div>
+  <div style="float:left">statistics dashboard</div>  
+</div>
+</h1>
+
+
+<div style="height:400px">
+  <div class="box" id="reg-graph">
+  </div>
+  <div class="box" id="ticket-graph">
+  </div>
+</div>
+
+<div style="height:100px; bottom:50px">
+  <div class="box" id="reg-stats"></div>
+  <div class="box" id="ticket-stats"></div>
+</div>
+
+<script type="text/template" id="RegStatsTemplate">
+    <table>
+      <thead>
+        <tr>
+          <td>total</td>
+          <td>ave reg rate</td>          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th><b><%=regTotal%></b></th>
+          <th><b>9000 </b>ppl/hr</th>
+        </tr>          
+      </tbody>
+    </table>
+</script>
+
+<script type="text/template" id="TicketStatsTemplate">
+    <table>
+      <thead>
+        <tr>        
+          <td>total submitted</td>
+          <td>total answered</td>
+          <td>ave response time</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>              
+          <th><b><%=ticketSubmitTotal%></b></th>
+          <th><b><%=ticketAnswerTotal%></b></th>
+          <th><b>10 </b>min</th>
+        </tr>
+      </tbody>
+    </table> 
+</script>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap.js"></script>
+<script type="text/javascript" src="assets/libs/highcharts.js"></script>
+<script type="text/javascript" src="assets/libs/underscore.js"></script>
+<script type="text/javascript" src="assets/libs/backbone.js"></script>
+<script type="text/javascript" src="assets/graph.js"></script>
+<script type="text/javascript" src="assets/monitor.js"></script>
+
+</body>
+
+</html>
