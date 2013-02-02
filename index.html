@@ -13,7 +13,7 @@
 <div style="height:50px">
   <div style="float:left; margin-right: 15px"><b>tech</b>fair</div>
   <div style="float:left; margin-right: 15px">|</div>
-  <div style="float:left">statistics dashboard</div>  
+  <div style="float:left">statistics dashboard</div>
 </div>
 </h1>
 
@@ -34,15 +34,15 @@
     <table>
       <thead>
         <tr>
-          <td>total</td>
-          <td>ave reg rate</td>          
+          <td class="two">total</td>
+          <td class="two">ave reg rate</td>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th><b><%=regTotal%></b></th>
-          <th><b>9000 </b>ppl/hr</th>
-        </tr>          
+          <th><b><%=regRate%></b>ppl/hr</th>
+        </tr>
       </tbody>
     </table>
 </script>
@@ -50,20 +50,20 @@
 <script type="text/template" id="TicketStatsTemplate">
     <table>
       <thead>
-        <tr>        
-          <td>total submitted</td>
-          <td>total answered</td>
-          <td>ave response time</td>
+        <tr>
+          <td class="three">total submitted</td>
+          <td class="three">total answered</td>
+          <td class="three">ave response time</td>
         </tr>
       </thead>
       <tbody>
-        <tr>              
+        <tr>
           <th><b><%=ticketSubmitTotal%></b></th>
           <th><b><%=ticketAnswerTotal%></b></th>
-          <th><b>10 </b>min</th>
+          <th><b><%=responseRate%></b>min</th>
         </tr>
       </tbody>
-    </table> 
+    </table>
 </script>
 
 

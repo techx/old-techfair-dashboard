@@ -1,9 +1,17 @@
 var regChart, ticketChart;
-var regTotal = 0, ticketSubmitTotal = 0, ticketAnswerTotal = 0;
+var regTotal = 0, regRate = 0;
+var ticketSubmitTotal = 0, ticketAnswerTotal = 0, responseRate = 0;
+
+Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
 
 /**
  * Request data from the server, add it to the graph and set a timeout to request again
  */
+
 function requestRegData() {
     $.ajax({
         url: 'regGraph.php',
@@ -13,11 +21,12 @@ function requestRegData() {
 
             // add the point
             regChart.series[0].addPoint(point, true, shift);
-            regTotal+=point[1];
+            regTotal = point[1];
+            regRate = point[2].toFixed(2);
             regStatsView.render();
 
             // call it again after one second
-            setTimeout(requestRegData, 1000);    
+            setTimeout(requestRegData, 1500);
         },
         cache: false
     });
@@ -27,6 +36,7 @@ function requestTicketData() {
     $.ajax({
         url: 'ticketGraph.php',
         success: function(point) {
+            console.log(point);
             var series = ticketChart.series[0],
                 shift = series.data.length > 20; // shift if the series is longer than 20
 
@@ -34,13 +44,13 @@ function requestTicketData() {
             ticketChart.series[0].addPoint(point, true, shift);
             ticketSubmitTotal+=point[1];
 
-            ticketChart.series[1].addPoint([point[0], point[1]-10], true, shift)
-            ticketAnswerTotal+=point[1]-10;
+//            ticketChart.series[1].addPoint([point[0], point[1]-10], true, shift);
+            ticketAnswerTotal=point[1]-10;
 
             ticketStatsView.render();
-            
+
             // call it again after one second
-            setTimeout(requestTicketData, 1000);    
+            setTimeout(requestTicketData, 1000);
         },
         cache: false
     });
@@ -55,6 +65,7 @@ $(document).ready(function() {
             marginLeft:50,
             marginRight: 20,
             marginBottom: 30,
+            backgroundColor: "transparent",
             events: {
                 load: requestRegData
             }
@@ -82,7 +93,7 @@ $(document).ready(function() {
             name: '# of People',
             data: []
         }]
-    });        
+    });
 
 ticketChart = new Highcharts.Chart({
         chart: {
@@ -91,6 +102,7 @@ ticketChart = new Highcharts.Chart({
             marginLeft:50,
             marginRight: 20,
             marginBottom: 30,
+            backgroundColor: "transparent",
             events: {
                 load: requestTicketData
             }
@@ -120,8 +132,8 @@ ticketChart = new Highcharts.Chart({
             },
             {
             name: 'Tickets Answered',
-            data: []                
+            data: []
             }
         ]
-    });        
+    });
 });

@@ -1,13 +1,30 @@
 <?php
-// Set the JSON header
-header("Content-type: text/json");
 
-// The x value is the current JavaScript time, which is the Unix time multiplied by 1000.
-$x = time() * 1000;
-// The y value is a random number
-$y = rand(0, 100);
+include('assets/libs/phpseclib0.3.1/Math/BigInteger.php');
+include('assets/libs/phpseclib0.3.1/Crypt/Random.php');
+include('assets/libs/phpseclib0.3.1/Crypt/Hash.php');
+include('assets/libs/phpseclib0.3.1/Crypt/TripleDES.php');
+include('assets/libs/phpseclib0.3.1/Crypt/RC4.php');
+include('assets/libs/phpseclib0.3.1/Crypt/AES.php');
+include('assets/libs/phpseclib0.3.1/Net/SSH2.php');
+include('assets/libs/phpseclib0.3.1/Crypt/RSA.php');
 
-// Create a PHP array and echo it as JSON
-$ret = array($x, $y);
-echo json_encode($ret);
+$key = new Crypt_RSA();
+
+$key->loadKey(file_get_contents('assets/techfair_ec2_keys.pem'));
+
+
+$ssh = new Net_SSH2('portal.mittechfair.org');
+if ($ssh->login(ubuntu, $key)) {
+
+echo "Successful connection";
+
+//this part isn't working.
+mysql_connect('portal.mittechfair.org', "root", "02139techfair") or die(mysql_error());
+
+echo @mysql_ping() ? 'true' : 'false';
+
+};
+
+
 ?>

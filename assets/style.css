@@ -1,5 +1,8 @@
 html {
 	height:100%;
+	background-image:url('bright_squares2.png');
+	background-repeat:repeat;
+
 }
 
 body {
@@ -15,19 +18,21 @@ h1 {
 	margin-bottom:0px;
 	font-family: 'Open Sans', sans serif;
 	font-weight:300;
+	color: #1790ee;
 }
 
 .box {
-	box-sizing: border-box;	
+	box-sizing: border-box;
 	min-width:45%;
 	min-height:100%;
 	margin:15px;
 	float:left;
-	border-style:solid;
+/*	border-style:solid; */
 	border-color:rgb(228, 225, 225);
 	border-width:1px;
 	border-radius:10px;
 	padding:3px;
+	color:white;
 	}
 
 #reg-stats, #ticket-stats {
@@ -44,7 +49,12 @@ table b {
 	font-size:30px;
 }
 
-th, td {
+th.three, td.three {
 	min-width:32%;
+	text-align:center;
+}
+
+th.two, td.two {
+	min-width:50%;
 	text-align:center;
 }
