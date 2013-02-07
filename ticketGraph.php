@@ -1,30 +1,37 @@
 <?php
 
-include('assets/libs/phpseclib0.3.1/Math/BigInteger.php');
-include('assets/libs/phpseclib0.3.1/Crypt/Random.php');
-include('assets/libs/phpseclib0.3.1/Crypt/Hash.php');
-include('assets/libs/phpseclib0.3.1/Crypt/TripleDES.php');
-include('assets/libs/phpseclib0.3.1/Crypt/RC4.php');
-include('assets/libs/phpseclib0.3.1/Crypt/AES.php');
-include('assets/libs/phpseclib0.3.1/Net/SSH2.php');
-include('assets/libs/phpseclib0.3.1/Crypt/RSA.php');
+header("Content-type: text/json");
 
-$key = new Crypt_RSA();
+$time = time() * 1000;
 
-$key->loadKey(file_get_contents('assets/techfair_ec2_keys.pem'));
+$smysql = mysql_connect( "portal.mittechfair.org", "merry", "it02139") or die(mysql_error());
+mysql_select_db( "logportal");
+
+//total submit count
+$result_count = mysql_query("SELECT COUNT(*) FROM portal_ticket") or die(mysql_error());
+$submitCount = mysql_result($result_count, 0);
+
+//total answer count
+$result_count = mysql_query("SELECT COUNT(*) FROM portal_ticket WHERE Date_Completed IS NOT NULL") or die(mysql_error());
+$answerCount = mysql_result($result_count, 0);
+
+//ave response time - NOT WORKING
+$resultOpened = mysql_query("SELECT Date_Opened FROM portal_ticket WHERE Date_Completed IS NOT NULL") or die(mysql_error());
+$resultClosed = mysql_query("SELECT Date_Completed FROM portal_ticket WHERE Date_Completed IS NOT NULL") or die(mysql_error());
+
+$openedRow = mysql_fetch_array($resultOpened);
+$closedRow = mysql_fetch_array($resultClosed);
+
+$opened = $openedRow['Date_Opened'];
+$closed = $closedRow['Date_Completed'];
 
 
-$ssh = new Net_SSH2('portal.mittechfair.org');
-if ($ssh->login(ubuntu, $key)) {
 
-echo "Successful connection";
+$submitTotal =  intval($submitCount);
+$answerTotal =  intval($answerCount);
+$point =  array($time, $submitTotal, $answerTotal,$opened, $closed);
 
-//this part isn't working.
-mysql_connect('portal.mittechfair.org', "root", "02139techfair") or die(mysql_error());
-
-echo @mysql_ping() ? 'true' : 'false';
-
-};
-
-
+echo json_encode($point);
 ?>
+
+

@@ -19,10 +19,11 @@ $first_time = mysql_fetch_array($result_first_time);
 
 $time_diff = strtotime($last_time['timestamp']) - strtotime($first_time['timestamp']);
 
-$rate = $count / $time_diff *  3600;
-
 $total =  intval($count);
-$point = array($time, $total, $rate);
+
+ $rate = $total / $time_diff *  3600;
+
+$point = array($time, $total, $rate, $first_time, $last_time);
 echo json_encode($point);
 
 ?>

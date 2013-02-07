@@ -43,6 +43,7 @@ table {
 	font-family: 'Open Sans', sans serif;
 	font-weight:300;
 	min-width:100%;
+	margin-left: 30px;
 }
 
 table b {
@@ -50,7 +51,7 @@ table b {
 }
 
 th.three, td.three {
-	min-width:32%;
+	min-width:50%;
 	text-align:center;
 }
 
